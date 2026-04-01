@@ -616,8 +616,16 @@
 
   const app  = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  signInAnonymously(auth);
-  const db = getDatabase(app);
+  const db   = getDatabase(app);
+
+  /* ── Sign in anonymously and grab our UID ─────────
+       Firebase assigns every visitor a unique ID (UID)
+       automatically. Think of it as a temporary passport.
+       The database security rules use it to ensure only
+       the two players inside a room can read/write it —
+       nobody else on the internet can touch your game. */
+  await signInAnonymously(auth);
+  const myUID = auth.currentUser.uid;
 
   /* ── Global state ──────────────────────────────── */
   window.isHost          = false;
@@ -678,7 +686,7 @@
     showView('view-wait');
 
     window.globalRoomRef = ref(db, `rooms/${code}`);
-    await set(window.globalRoomRef, { status: 'waiting' });
+    await set(window.globalRoomRef, { status: 'waiting', hostUID: myUID });
 
     onValue(window.globalRoomRef, snap => {
       if (!snap.exists()) return;
@@ -715,7 +723,7 @@
     try {
       const snap = await get(window.globalRoomRef);
       if (snap.exists() && snap.val().status === 'waiting') {
-        await update(window.globalRoomRef, { status: 'playing' });
+        await update(window.globalRoomRef, { status: 'playing', guestUID: myUID });
         onValue(window.globalRoomRef, s => {
           if (!s.exists()) return;
           const data = s.val();
