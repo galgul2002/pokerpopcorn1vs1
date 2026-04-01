@@ -602,6 +602,7 @@
   import { initializeApp }          from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
   import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
   import { getDatabase, ref, set, get, onValue, update } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+  import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-functions.js";
 
   /* ── Firebase config ───────────────────────────── */
   const firebaseConfig = {
@@ -616,7 +617,9 @@
 
   const app  = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const db   = getDatabase(app);
+  const db        = getDatabase(app);
+  const functions  = getFunctions(app, 'europe-west1'); // match your Firebase region
+  const dealCards  = httpsCallable(functions, 'dealCards');
 
   /* ── Sign in anonymously and grab our UID ─────────
        Firebase assigns every visitor a unique ID (UID)
@@ -739,32 +742,20 @@
   };
 
   /* ── Start / deal ──────────────────────────────── */
+  // The deck is now shuffled on Google's servers via a Cloud Function.
+  // The host's browser just sends the room code — it never touches the cards.
   window.startGame = async function () {
     if (!window.isHost) return;
-
     document.getElementById('col-results').innerHTML = '';
 
-    // Shuffle deck
-    let deck = [];
-    for (const suit of suits) for (const rank of ranks) deck.push({ rank, s: suit.s, c: suit.c });
-    for (let i = deck.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [deck[i], deck[j]] = [deck[j], deck[i]];
+    const roomCode = window.globalRoomRef.key; // e.g. "AB3X"
+    try {
+      await dealCards({ roomCode });
+      // Firebase's onValue listener picks up the new gameState automatically —
+      // no extra code needed here.
+    } catch (err) {
+      showToast('Deal failed: ' + err.message);
     }
-
-    const hGrid = Array.from({ length: 5 }, () => Array(5).fill('empty'));
-    const cGrid = Array.from({ length: 5 }, () => Array(5).fill('empty'));
-    for (let c = 0; c < 5; c++) hGrid[c][0] = deck.pop();
-    for (let c = 0; c < 5; c++) cGrid[c][0] = deck.pop();
-    const firstCard = deck.pop();
-
-    await update(window.globalRoomRef, {
-      gameState: {
-        deck, hostGrid: hGrid, clientGrid: cGrid,
-        activePlayer: 1, cardInHand: firstCard,
-        currentPhase: 1, showdownActive: false, phase3Turn: 0
-      }
-    });
   };
 
   /* ── Sync from Firebase ────────────────────────── */
