@@ -214,7 +214,7 @@
   #boards-wrap{
     display:flex;flex-direction:column;
     align-items:center;
-    gap:2px; /* boards nearly touching — like cards across a real table */
+    gap:18px;
   }
 
 
@@ -573,11 +573,7 @@
 <!-- GAME TABLE -->
 <div id="game-container">
   <div id="centre-strip">
-    <div class="score-number" id="p1-score-num">0</div>
-    <div class="score-divider"></div>
     <div id="col-results"></div>
-    <div class="score-divider"></div>
-    <div class="score-number" id="p2-score-num" style="color:rgba(255,255,255,.28)">0</div>
   </div>
   <div id="boards-wrap">
     <div>
@@ -666,17 +662,9 @@
 
   const transitionToGame = () => {
     document.getElementById('lobby-ui').style.display = 'none';
-    document.getElementById('overlay').style.display  = 'flex';
-    const startBtn = document.getElementById('start-btn');
-    const subtitle = document.getElementById('overlay-subtitle');
-    if (window.isHost) {
-      startBtn.style.display = 'block';
-      startBtn.textContent   = 'Deal Cards';
-      subtitle.textContent   = 'You are the Dealer';
-    } else {
-      startBtn.style.display = 'none';
-      subtitle.textContent   = 'Waiting for Host to deal…';
-    }
+    document.getElementById('overlay').style.display  = 'none';
+    // Host deals immediately — no intermediate screen
+    if (window.isHost) startGame();
   };
 
   /* ── Lobby: Create room ────────────────────────── */
@@ -746,9 +734,7 @@
   window.startGame = async function () {
     if (!window.isHost) return;
 
-    document.getElementById('p1-score-num').textContent = '0';
-    document.getElementById('p2-score-num').textContent = '0';
-    document.getElementById('col-results').innerHTML    = '';
+    document.getElementById('col-results').innerHTML = '';
 
     // Shuffle deck
     let deck = [];
@@ -1046,12 +1032,7 @@
       resultEls[c].innerHTML = `<div class="cr-verdict">${verdict}</div><div class="cr-hand">${handName}</div>`;
       resultEls[c].classList.add(cls, 'show');
 
-      const p1ScoreEl = document.getElementById('p1-score-num');
-      p1ScoreEl.textContent = p1Wins;
-      p1ScoreEl.classList.remove('pop');
-      void p1ScoreEl.offsetWidth;
-      p1ScoreEl.classList.add('pop');
-      document.getElementById('p2-score-num').textContent = p2Wins;
+      // (score tracking removed)
 
       // Highlight winning cards
       const toHL = [];
@@ -1091,37 +1072,25 @@
       streakBadge.classList.remove('show');
     }
 
-    // Result overlay
+    // Result overlay — just Victory/Defeated and Deal Again
     document.getElementById('phase-hint').textContent = '';
     const overlayTitle = document.getElementById('overlay-title');
     overlayTitle.textContent = won ? 'Victory' : 'Defeated';
     overlayTitle.style.color = won ? '#27ae60' : '#e74c3c';
 
-    const scoreEl = document.getElementById('overlay-result-score');
-    scoreEl.style.display = 'block';
-    scoreEl.textContent    = `${p1Wins} — ${p2Wins}`;
-
-    const streakEl = document.getElementById('overlay-streak');
-    if (window.winStreak >= 2) {
-      streakEl.style.display = 'block';
-      streakEl.textContent   = `🔥 ${window.winStreak} win streak!`;
-    } else {
-      streakEl.style.display = 'none';
-    }
-
-    const recordEl = document.getElementById('overlay-record');
-    recordEl.style.display = 'block';
-    recordEl.textContent   = `${window.totalWins}W · ${window.totalGames - window.totalWins}L`;
+    document.getElementById('overlay-result-score').style.display = 'none';
+    document.getElementById('overlay-streak').style.display = 'none';
+    document.getElementById('overlay-record').style.display = 'none';
 
     const startBtn = document.getElementById('start-btn');
     const subtitle = document.getElementById('overlay-subtitle');
     if (window.isHost) {
       startBtn.style.display = 'block';
       startBtn.textContent   = 'Deal Again';
-      subtitle.textContent   = 'You are the Dealer';
+      subtitle.textContent   = '';
     } else {
       startBtn.style.display = 'none';
-      subtitle.textContent   = 'Waiting for Host to deal…';
+      subtitle.textContent   = 'Waiting for host…';
     }
 
     document.getElementById('overlay').style.display = 'flex';
