@@ -1,0 +1,37 @@
+name: Deploy Firebase Functions
+
+on:
+  push:
+    branches:
+      - main          # runs every time you push to main
+    paths:
+      - 'functions/**'  # only when something in /functions changes
+                        # pushing only index.html won't trigger this
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Check out your code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Install Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. Install the function's dependencies (firebase-admin etc.)
+      - name: Install function dependencies
+        run: npm install
+        working-directory: functions
+
+      # 4. Deploy only the functions — not hosting, not rules
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only functions
+        env:
+          GCP_SA_KEY: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
