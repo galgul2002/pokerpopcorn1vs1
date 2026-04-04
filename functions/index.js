@@ -87,6 +87,3 @@ exports.dealCards = onCall(async (request) => {
 
   return { success: true };
 });
-
-
-
