@@ -14,7 +14,7 @@ initializeApp();
 //   3. Deals starting cards to both grids
 //   4. Writes the result to Firebase — both players receive it simultaneously
 
-exports.dealCards = onCall(async (request) => {
+exports.dealCards = onCall({ region: 'europe-west1' }, async (request) => {
 
   // ── 1. Who is calling? ──────────────────────────────────────────────────
   // request.auth is set automatically by Firebase when the client calls this.
