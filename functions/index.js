@@ -87,6 +87,3 @@ exports.dealCards = onCall({ region: 'europe-west1' }, async (request) => {
 
   return { success: true };
 });
-
-
-
