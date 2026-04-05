@@ -293,16 +293,14 @@
   }
 
   /* ── CARDS ───────────────────────────────────────── */
-  .card{
-    width:var(--card-w);height:var(--card-h);
-    background:var(--cream);
-    border-radius:var(--radius-card);
-    position:relative;
-    box-shadow:var(--shadow-card);
-    overflow:hidden;
-    transition:box-shadow .25s ease, transform .15s ease;
-    border:1px solid rgba(255,255,255,.9);
-  }
+ .card{
+  width:var(--card-w);height:var(--card-h);
+  border-radius:var(--radius-card);
+  position:relative;
+  box-shadow:var(--shadow-card);
+  overflow:hidden;
+  transition:box-shadow .25s ease, transform .15s ease;
+}
   /* Gloss sheen */
   .card:not(.back)::before{
     content:'';position:absolute;inset:0;border-radius:var(--radius-card);z-index:1;pointer-events:none;
