@@ -302,6 +302,9 @@
     transition:box-shadow .25s ease, transform .15s ease;
   }
   /* Gloss sheen */
+  .upside-down img{
+  transform: rotate(180deg);
+}
   .card:not(.back)::before{
     content:'';position:absolute;inset:0;border-radius:var(--radius-card);z-index:1;pointer-events:none;
     background:linear-gradient(135deg,rgba(255,255,255,.22) 0%,transparent 50%,rgba(0,0,0,.04) 100%);
