@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300">
+  <rect x="5" y="5" width="190" height="290" rx="15" ry="15" fill="white" stroke="black" stroke-width="2"/>
+  
+  <text x="20" y="45" font-size="36" font-family="Arial, sans-serif" font-weight="bold" fill="#000000">J</text>
+  
+  <path d="M 176,18 C 190,32 190,44 182,45 C 176,46 176,38 176,38 C 176,38 176,46 170,45 C 162,44 162,32 176,18 Z M 176,38 L 172,48 L 180,48 Z" fill="#000000"/>
+  
+  <path d="M 100,90 C 150,140 160,180 130,190 C 110,195 100,160 100,160 C 100,160 90,195 70,190 C 40,180 50,140 100,90 Z M 100,160 L 85,210 L 115,210 Z" fill="#000000"/>
+  
+  <polygon points="75,85 85,50 100,70 115,50 125,85" fill="#FFD700" stroke="#000000" stroke-width="2"/>
+  <circle cx="85" cy="50" r="4" fill="#000000"/>
+  <circle cx="115" cy="50" r="4" fill="#000000"/>
+  
+  <rect x="45" y="80" width="6" height="140" fill="#333333"/>
+  <polygon points="40,80 56,80 48,50" fill="#999999" stroke="#000000" stroke-width="1"/>
+</svg>

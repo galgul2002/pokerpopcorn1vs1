@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300">
+  <rect x="5" y="5" width="190" height="290" rx="15" ry="15" fill="white" stroke="black" stroke-width="2"/>
+  
+  <text x="20" y="45" font-size="36" font-family="Arial, sans-serif" font-weight="bold" fill="#D40000">K</text>
+  
+  <path d="M 176,28 A 6,6 0 0,0 164,28 C 164,36 176,44 176,46 C 176,44 188,36 188,28 A 6,6 0 0,0 176,28 Z" fill="#D40000"/>
+  
+  <path d="M 100,110 A 30,30 0 0,0 40,110 C 40,160 100,210 100,230 C 100,210 160,160 160,110 A 30,30 0 0,0 100,110 Z" fill="#D40000"/>
+  
+  <polygon points="65,105 55,50 80,75 100,45 120,75 145,50 135,105" fill="#FFD700" stroke="#000000" stroke-width="2"/>
+  <circle cx="55" cy="50" r="4" fill="#D40000"/>
+  <circle cx="100" cy="45" r="5" fill="#D40000"/>
+  <circle cx="145" cy="50" r="4" fill="#D40000"/>
+  
+  <rect x="35" y="50" width="8" height="160" fill="#999999" stroke="#000000" stroke-width="1"/>
+  <polygon points="39,30 31,50 47,50" fill="#999999" stroke="#000000" stroke-width="1"/>
+  <rect x="25" y="100" width="28" height="8" fill="#FFD700" stroke="#000000" stroke-width="1"/>
+</svg>

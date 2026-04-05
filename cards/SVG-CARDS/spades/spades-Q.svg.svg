@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300">
+  <rect x="5" y="5" width="190" height="290" rx="15" ry="15" fill="white" stroke="black" stroke-width="2"/>
+  
+  <text x="15" y="45" font-size="36" font-family="Arial, sans-serif" font-weight="bold" fill="#000000">Q</text>
+  
+  <path d="M 176,18 C 190,32 190,44 182,45 C 176,46 176,38 176,38 C 176,38 176,46 170,45 C 162,44 162,32 176,18 Z M 176,38 L 172,48 L 180,48 Z" fill="#000000"/>
+  
+  <path d="M 100,90 C 150,140 160,180 130,190 C 110,195 100,160 100,160 C 100,160 90,195 70,190 C 40,180 50,140 100,90 Z M 100,160 L 85,210 L 115,210 Z" fill="#000000"/>
+  
+  <path d="M 70,85 C 70,40 100,70 100,70 C 100,70 130,40 130,85 Z" fill="#FFD700" stroke="#000000" stroke-width="2"/>
+  <circle cx="70" cy="45" r="5" fill="#000000"/>
+  <circle cx="130" cy="45" r="5" fill="#000000"/>
+  <circle cx="100" cy="70" r="6" fill="#FFFFFF" stroke="#000000" stroke-width="1"/>
+  
+  <rect x="140" y="100" width="4" height="100" fill="#FFD700" stroke="#000000" stroke-width="1"/>
+  <path d="M 142,85 C 152,75 160,95 142,105 C 124,95 132,75 142,85 Z" fill="#000000"/>
+</svg>

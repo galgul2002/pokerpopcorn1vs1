@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300">
+  <rect x="5" y="5" width="190" height="290" rx="15" ry="15" fill="white" stroke="black" stroke-width="2"/>
+  
+  <text x="20" y="45" font-size="36" font-family="Arial, sans-serif" font-weight="bold" fill="#000000">2</text>
+  
+  <path d="M 176,18 C 190,32 190,44 182,45 C 176,46 176,38 176,38 C 176,38 176,46 170,45 C 162,44 162,32 176,18 Z M 176,38 L 172,48 L 180,48 Z" fill="#000000"/>
+  
+  <path d="M 100,70 C 150,120 160,160 130,170 C 110,175 100,140 100,140 C 100,140 90,175 70,170 C 40,160 50,120 100,70 Z M 100,140 L 85,190 L 115,190 Z" fill="#000000"/>
+</svg>

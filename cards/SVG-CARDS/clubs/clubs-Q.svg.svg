@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 300" width="200" height="300">
+  <rect x="5" y="5" width="190" height="290" rx="15" ry="15" fill="white" stroke="black" stroke-width="2"/>
+  
+  <text x="15" y="45" font-size="36" font-family="Arial, sans-serif" font-weight="bold" fill="#000000">Q</text>
+  
+  <g fill="#000000">
+    <circle cx="176" cy="24" r="5.5"/>
+    <circle cx="170.5" cy="31.5" r="5.5"/>
+    <circle cx="181.5" cy="31.5" r="5.5"/>
+    <path d="M 176,30 L 172,44 L 180,44 Z"/>
+  </g>
+  
+  <g fill="#000000">
+    <circle cx="100" cy="115" r="22"/>
+    <circle cx="78" cy="145" r="22"/>
+    <circle cx="122" cy="145" r="22"/>
+    <path d="M 100,140 L 85,195 L 115,195 Z"/>
+  </g>
+  
+  <path d="M 75,98 C 75,55 100,80 100,80 C 100,80 125,55 125,98 Z" fill="#FFD700" stroke="#000000" stroke-width="2"/>
+  <circle cx="75" cy="60" r="5" fill="#000000"/>
+  <circle cx="125" cy="60" r="5" fill="#000000"/>
+  
+  <rect x="140" y="100" width="4" height="100" fill="#FFD700" stroke="#000000" stroke-width="1"/>
+  <circle cx="142" cy="80" r="4" fill="#000000"/>
+  <circle cx="136" cy="88" r="4" fill="#000000"/>
+  <circle cx="148" cy="88" r="4" fill="#000000"/>
+</svg>
