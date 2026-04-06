@@ -912,8 +912,9 @@
     const src = `cards/SVG-CARDS/${suitName}/${suitName}-${card.rank}.svg.svg`;
     return `<div ${idAttr} class="${cls}" style="--row:${row}">
       <img src="${src}" style="width:100%;height:100%;display:block;border-radius:var(--radius-card);" draggable="false"/>
+    </div>`;
   }
-
+  
   function renderBoards(isMyTurn) {
     const p1Board  = document.getElementById('player-board');
     const p2Board  = document.getElementById('opponent-board');
