@@ -301,6 +301,11 @@
     overflow:hidden;
     transition:box-shadow .25s ease, transform .15s ease;
   }
+  /* Opponent cards rotate 180deg */
+  .upside-down img{
+    transform: rotate(180deg);
+  }
+
   /* Gloss sheen */
   .card:not(.back)::before{
     content:'';position:absolute;inset:0;border-radius:var(--radius-card);z-index:1;pointer-events:none;
@@ -960,14 +965,29 @@
     return new Promise(resolve => {
       const el = document.getElementById(`p2-card-${col}-${row}`);
       if (!el) return resolve();
-      el.classList.add('flip-anim');
+
+      const card = window.p2Grid[col][row];
+      const suitMap2 = { '♥':'hearts', '♦':'diamonds', '♣':'clubs', '♠':'spades' };
+      const sn = suitMap2[card.s];
+      const imgHTML = `<img src="cards/SVG-CARDS/${sn}/${sn}-${card.rank}.svg.svg" style="width:100%;height:100%;display:block;border-radius:var(--radius-card);transform:rotate(180deg);" draggable="false"/>`;
+
+      // Phase 1: rotate to 90deg (card edge — invisible)
+      el.style.transition = 'transform 0.25s ease-in';
+      el.style.transform  = 'perspective(600px) rotateY(90deg)';
+
       setTimeout(() => {
-        const card = window.p2Grid[col][row];
-        const suitMap2 = { '♥':'hearts', '♦':'diamonds', '♣':'clubs', '♠':'spades' };
-        const sn = suitMap2[card.s];
-        el.className = 'card upside-down'; el.style.cssText = `--row:${row};`;
-        el.innerHTML = `<img src="cards/SVG-CARDS/${sn}/${sn}-${card.rank}.svg.svg" style="width:100%;height:100%;display:block;border-radius:var(--radius-card);" draggable="false"/>`;
-      }, 270);
+        // Swap content at the halfway point while card is edge-on
+        el.innerHTML = imgHTML;
+        el.classList.remove('back');
+        el.className = 'card upside-down';
+        el.style.cssText = `--row:${row};transition:transform 0.25s ease-out;transform:perspective(600px) rotateY(90deg);`;
+
+        // Phase 2: rotate back to 0deg showing the face
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          el.style.transform = 'perspective(600px) rotateY(0deg)';
+        }));
+      }, 260);
+
       setTimeout(resolve, 540);
     });
   }
